@@ -154,12 +154,4 @@ defmodule CurrencyText.Vnd.Digit do
       }) do
     @digit_map |> Map.get(value)
   end
-
-  def previous_digit(block = %CurrencyText.Vnd.Block{}, index) do
-    index
-    |> case do
-      0 -> nil
-      _ -> block.value |> Integer.to_string() |> String.at(index - 1)
-    end
-  end
 end
