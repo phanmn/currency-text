@@ -25,6 +25,9 @@ defmodule CurrencyText.Vnd do
     iex> 105 |> CurrencyText.Vnd.to_string()
     "Một trăm lẻ năm đồng"
 
+    iex> 105.0 |> CurrencyText.Vnd.to_string()
+    "Một trăm lẻ năm đồng"
+
     iex> 105400000 |> CurrencyText.Vnd.to_string()
     "Một trăm lẻ năm triệu bốn trăm nghìn đồng"
   """
