@@ -1,14 +1,8 @@
 defmodule CurrencyText.CurrencyToText do
   require Logger
-  def convert_to_words(value, currency) do
-    currency
-    |> case do
-      "VND" ->
-        convert_to_words_vietnamese(value)
-      _ ->
-        true
-        #convert_to_words_en(value)
-    end
+  def convert_to_words(value) do
+    value
+    |> convert_to_words_vietnamese()
   end
 
   defp convert_to_words_vietnamese(value) do
@@ -17,15 +11,24 @@ defmodule CurrencyText.CurrencyToText do
     thousands = value |> div(1_000) |> rem(1000)
     unit = value |> rem(1000)
 
-    %{billions: billions, millions: millions, thousands: thousands, unit: unit}
-    |> Logger.error()
-
-    %{billions: billions, millions: millions, thousands: thousands, unit: unit}
-    |> CurrencyText.Vnd.Helper.ThreeDigits.build()
+    #%{billions: billions, millions: millions, thousands: thousands, unit: unit}
+    [%CurrencyText.Vnd.Block{value: billions, type: "billions"},
+    %CurrencyText.Vnd.Block{value: millions, type: "millions"},
+    %CurrencyText.Vnd.Block{value: thousands, type: "thousands"},
+    %CurrencyText.Vnd.Block{value: unit, type: "unit"}]
+    |> Enum.map(fn block ->
+      block |> CurrencyText.Vnd.Block.to_string()
+    end)
+    |> Enum.filter(fn i -> i != "" end)
+    |> Enum.join(" ")
+    |> Kernel.<>(" đồng")
     |> String.capitalize()
-  end
 
-  defp convert_to_words_en(value) do
-    value |> Cldr.Number.to_string(format: :spellout)
+    # %{billions: billions, millions: millions, thousands: thousands, unit: unit}
+    # |> CurrencyText.Vnd.Helper.ThreeDigits.build()
+    # |> String.split(" ")
+    # |> List.delete("")
+    # |> Enum.join(" ")
+    # |> String.capitalize()
   end
 end

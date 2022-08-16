@@ -7,23 +7,24 @@ defmodule CurrencyText.Vnd.Digit do
     field(:block_length, integer(), enforce: true)
     field(:previous_digit, String.t())
   end
-@doc ~S"""
-      iex> %CurrencyText.Vnd.Block{type: "millions", value: 911} |> CurrencyText.Vnd.Digit.from_block()
-      [%CurrencyText.Vnd.Digit{value: "9", location: 0, block_length: 3, previous_digit: nil},
-      %CurrencyText.Vnd.Digit{value: "1", location: 1, block_length: 3, previous_digit: %CurrencyText.Vnd.Digit{value: "9", location: 0, block_length: 3, previous_digit: nil}},
-      %CurrencyText.Vnd.Digit{value: "1", location: 2, block_length: 3, previous_digit: %CurrencyText.Vnd.Digit{value: "1", location: 1, block_length: 3, previous_digit: %CurrencyText.Vnd.Digit{value: "9", location: 0, block_length: 3, previous_digit: nil}}}]
 
-      iex> %CurrencyText.Vnd.Block{type: "millions", value: 304} |> CurrencyText.Vnd.Digit.from_block()
-      [%CurrencyText.Vnd.Digit{value: "3", location: 0, block_length: 3, previous_digit: nil},
-      %CurrencyText.Vnd.Digit{value: "0", location: 1, block_length: 3, previous_digit: %CurrencyText.Vnd.Digit{value: "3", location: 0, block_length: 3, previous_digit: nil}},
-      %CurrencyText.Vnd.Digit{value: "4", location: 2, block_length: 3, previous_digit: %CurrencyText.Vnd.Digit{value: "0", location: 1, block_length: 3, previous_digit: %CurrencyText.Vnd.Digit{value: "3", location: 0, block_length: 3, previous_digit: nil}}}]
+  @doc ~S"""
+  iex> %CurrencyText.Vnd.Block{type: "millions", value: 911} |> CurrencyText.Vnd.Digit.from_block()
+  [%CurrencyText.Vnd.Digit{value: "9", location: 0, block_length: 3, previous_digit: nil},
+  %CurrencyText.Vnd.Digit{value: "1", location: 1, block_length: 3, previous_digit: %CurrencyText.Vnd.Digit{value: "9", location: 0, block_length: 3, previous_digit: nil}},
+  %CurrencyText.Vnd.Digit{value: "1", location: 2, block_length: 3, previous_digit: %CurrencyText.Vnd.Digit{value: "1", location: 1, block_length: 3, previous_digit: %CurrencyText.Vnd.Digit{value: "9", location: 0, block_length: 3, previous_digit: nil}}}]
 
-      iex> %CurrencyText.Vnd.Block{type: "millions", value: 8} |> CurrencyText.Vnd.Digit.from_block()
-      [%CurrencyText.Vnd.Digit{value: "0", location: 0, block_length: 1, previous_digit: nil},
-      %CurrencyText.Vnd.Digit{value: "0", location: 1, block_length: 1, previous_digit: %CurrencyText.Vnd.Digit{value: "0", location: 0, block_length: 1, previous_digit: nil}},
-      %CurrencyText.Vnd.Digit{value: "8", location: 2, block_length: 1, previous_digit: %CurrencyText.Vnd.Digit{value: "0", location: 1, block_length: 1, previous_digit: %CurrencyText.Vnd.Digit{value: "0", location: 0, block_length: 1, previous_digit: nil}}}]
+  iex> %CurrencyText.Vnd.Block{type: "millions", value: 304} |> CurrencyText.Vnd.Digit.from_block()
+  [%CurrencyText.Vnd.Digit{value: "3", location: 0, block_length: 3, previous_digit: nil},
+  %CurrencyText.Vnd.Digit{value: "0", location: 1, block_length: 3, previous_digit: %CurrencyText.Vnd.Digit{value: "3", location: 0, block_length: 3, previous_digit: nil}},
+  %CurrencyText.Vnd.Digit{value: "4", location: 2, block_length: 3, previous_digit: %CurrencyText.Vnd.Digit{value: "0", location: 1, block_length: 3, previous_digit: %CurrencyText.Vnd.Digit{value: "3", location: 0, block_length: 3, previous_digit: nil}}}]
 
-      """
+  iex> %CurrencyText.Vnd.Block{type: "millions", value: 8} |> CurrencyText.Vnd.Digit.from_block()
+  [%CurrencyText.Vnd.Digit{value: "0", location: 0, block_length: 1, previous_digit: nil},
+  %CurrencyText.Vnd.Digit{value: "0", location: 1, block_length: 1, previous_digit: %CurrencyText.Vnd.Digit{value: "0", location: 0, block_length: 1, previous_digit: nil}},
+  %CurrencyText.Vnd.Digit{value: "8", location: 2, block_length: 1, previous_digit: %CurrencyText.Vnd.Digit{value: "0", location: 1, block_length: 1, previous_digit: %CurrencyText.Vnd.Digit{value: "0", location: 0, block_length: 1, previous_digit: nil}}}]
+
+  """
   def from_block(block = %CurrencyText.Vnd.Block{}) do
     block_length = block |> CurrencyText.Vnd.Block.length()
 
@@ -61,9 +62,6 @@ defmodule CurrencyText.Vnd.Digit do
 
   @doc ~S"""
     Convert digit to string
-        iex> %CurrencyText.Vnd.Digit{value: "0", location: 1, block_length: 3, previous_digit: "2"} |> CurrencyText.Vnd.Digit.to_string()
-        "lẻ"
-
         iex> %CurrencyText.Vnd.Digit{value: "0", location: 1, block_length: 1, previous_digit: "2"} |> CurrencyText.Vnd.Digit.to_string()
         ""
 
@@ -90,15 +88,25 @@ defmodule CurrencyText.Vnd.Digit do
 
         iex> %CurrencyText.Vnd.Digit{value: "0", location: 0, block_length: 3, previous_digit: ""} |> CurrencyText.Vnd.Digit.to_string()
         ""
+
+        iex> %CurrencyText.Vnd.Digit{value: "4", location: 2, block_length: 3, previous_digit: %CurrencyText.Vnd.Digit{value: "0", location: 1, block_length: 3, previous_digit: ""}} |> CurrencyText.Vnd.Digit.to_string()
+        "lẻ bốn"
+
+        iex> %CurrencyText.Vnd.Digit{value: "5", location: 2, block_length: 3, previous_digit: %CurrencyText.Vnd.Digit{value: "0", location: 1, block_length: 3, previous_digit: ""}} |> CurrencyText.Vnd.Digit.to_string()
+        "lẻ năm"
+
+        iex> %CurrencyText.Vnd.Digit{value: "5", location: 2, block_length: 3, previous_digit: %CurrencyText.Vnd.Digit{value: "1", location: 1, block_length: 3, previous_digit: ""}} |> CurrencyText.Vnd.Digit.to_string()
+        "lăm"
   """
-  def to_string(%CurrencyText.Vnd.Digit{
-        value: "0",
-        location: 1,
-        block_length: 3,
-        previous_digit: _
-      }) do
-    "lẻ"
-  end
+
+  # def to_string(%CurrencyText.Vnd.Digit{
+  #       value: "0",
+  #       location: 1,
+  #       block_length: 3,
+  #       previous_digit: _
+  #     }) do
+  #   "lẻ"
+  # end
 
   def to_string(%CurrencyText.Vnd.Digit{
         value: "0",
@@ -124,9 +132,19 @@ defmodule CurrencyText.Vnd.Digit do
         block_length: block_length,
         previous_digit: previous_digit
       })
-      when block_length != 1 and previous_digit.value != "1" do
+      when block_length != 1 and previous_digit.value != "1" and previous_digit.value != "0" do
     "mốt"
   end
+
+  def to_string(%CurrencyText.Vnd.Digit{
+    value: "5",
+    location: 2,
+    block_length: _,
+    previous_digit: previous_digit
+  })
+  when previous_digit.value != "0" do
+"lăm"
+end
 
   def to_string(%CurrencyText.Vnd.Digit{
         value: value,
@@ -144,6 +162,22 @@ defmodule CurrencyText.Vnd.Digit do
         previous_digit: _
       }) do
     @digit_map |> Map.get(value) |> Kernel.<>(" mươi")
+  end
+
+  def to_string(%CurrencyText.Vnd.Digit{
+        value: value,
+        location: 2,
+        block_length: 3,
+        previous_digit: %CurrencyText.Vnd.Digit{
+          value: prev_value,
+          location: 1,
+          block_length: 3,
+          previous_digit: _
+        }
+      })
+      when value != "0" and prev_value == "0" do
+    "lẻ "
+    |> Kernel.<>(@digit_map |> Map.get(value))
   end
 
   def to_string(%CurrencyText.Vnd.Digit{
