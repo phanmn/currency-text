@@ -29,6 +29,12 @@ defmodule CurrencyText.Vnd do
     "Một trăm lẻ năm triệu bốn trăm nghìn đồng"
   """
 
+  def to_string(amount) when is_float(amount) do
+    amount
+    |> trunc()
+    |> __MODULE__.to_string()
+  end
+
   def to_string(0) do
     "Không đồng"
   end
