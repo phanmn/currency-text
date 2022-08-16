@@ -1,13 +1,13 @@
 defmodule CurrencyText.Vnd do
 
   @doc """
-    iex> 900000 |> CurrencyText.Vnd.to_string()
+    iex> 900_000 |> CurrencyText.Vnd.to_string()
     "Chín trăm nghìn đồng"
 
-    iex> 91024012 |> CurrencyText.Vnd.to_string()
+    iex> 91_024_012 |> CurrencyText.Vnd.to_string()
     "Chín mươi mốt triệu hai mươi bốn nghìn mười hai đồng"
 
-    iex> 110000 |> CurrencyText.Vnd.to_string()
+    iex> 110_000 |> CurrencyText.Vnd.to_string()
     "Một trăm mười nghìn đồng"
 
     iex> 0 |> CurrencyText.Vnd.to_string()
@@ -16,7 +16,7 @@ defmodule CurrencyText.Vnd do
     iex> 1 |> CurrencyText.Vnd.to_string()
     "Một đồng"
 
-    iex> 129481294121 |> CurrencyText.Vnd.to_string()
+    iex> 129_481_294_121 |> CurrencyText.Vnd.to_string()
     "Một trăm hai mươi chín tỷ bốn trăm tám mươi mốt triệu hai trăm chín mươi bốn nghìn một trăm hai mươi mốt đồng"
 
     iex> 35 |> CurrencyText.Vnd.to_string()
@@ -28,7 +28,7 @@ defmodule CurrencyText.Vnd do
     iex> 105.0 |> CurrencyText.Vnd.to_string()
     "Một trăm lẻ năm đồng"
 
-    iex> 105400000 |> CurrencyText.Vnd.to_string()
+    iex> 105_400_000 |> CurrencyText.Vnd.to_string()
     "Một trăm lẻ năm triệu bốn trăm nghìn đồng"
   """
 
