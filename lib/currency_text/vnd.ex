@@ -30,6 +30,9 @@ defmodule CurrencyText.Vnd do
 
     iex> 105_400_000 |> CurrencyText.Vnd.to_string()
     "Một trăm lẻ năm triệu bốn trăm nghìn đồng"
+
+    iex> 8.0e5 |> CurrencyText.Vnd.to_string()
+    "Tám trăm nghìn đồng"
   """
 
   def to_string(amount) when is_float(amount) do
