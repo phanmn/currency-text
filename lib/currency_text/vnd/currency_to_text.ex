@@ -11,7 +11,6 @@ defmodule CurrencyText.CurrencyToText do
     thousands = value |> div(1_000) |> rem(1000)
     unit = value |> rem(1000)
 
-    #%{billions: billions, millions: millions, thousands: thousands, unit: unit}
     [%CurrencyText.Vnd.Block{value: billions, type: "billions"},
     %CurrencyText.Vnd.Block{value: millions, type: "millions"},
     %CurrencyText.Vnd.Block{value: thousands, type: "thousands"},
@@ -24,11 +23,5 @@ defmodule CurrencyText.CurrencyToText do
     |> Kernel.<>(" đồng")
     |> String.capitalize()
 
-    # %{billions: billions, millions: millions, thousands: thousands, unit: unit}
-    # |> CurrencyText.Vnd.Helper.ThreeDigits.build()
-    # |> String.split(" ")
-    # |> List.delete("")
-    # |> Enum.join(" ")
-    # |> String.capitalize()
   end
 end
