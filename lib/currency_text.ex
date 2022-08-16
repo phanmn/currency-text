@@ -1,5 +1,6 @@
 defmodule CurrencyText do
-  def convert(%{amount: amount, currency: "VND"}) do
-
+  def to_string(%{amount: amount, currency: "VND"}) do
+    amount
+    |> CurrencyText.Vnd.to_string()
   end
 end
