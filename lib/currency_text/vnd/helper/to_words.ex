@@ -1,5 +1,4 @@
-defmodule CurrencyText.Helper.Helper do
-  @spec read_block_three(any) :: String.t()
+defmodule CurrencyText.Vnd.Helper.ToWords do
   def read_block_three(value) do
     value
     |> case do
@@ -17,10 +16,19 @@ defmodule CurrencyText.Helper.Helper do
           |> Integer.to_string()
           |> String.pad_leading(3, "0")
 
-        for i <- 0..2 do
-          read_one_digit(%{value: value |> String.at(i), position: i, length: length})
+        cond do
+          value |> String.at(1) == "0" and value |> String.at(2) == "0" ->
+            (value |> String.at(0) |> digit_map_value()) <> " trăm"
+
+          value |> String.at(0) == "0" and value |> String.at(1) == "0" ->
+            value |> String.at(2) |> digit_map_value()
+
+          true ->
+            for i <- 0..2 do
+              read_one_digit(%{value: value |> String.at(i), position: i, length: length})
+            end
+            |> Enum.join(" ")
         end
-        |> Enum.join(" ")
     end
   end
 

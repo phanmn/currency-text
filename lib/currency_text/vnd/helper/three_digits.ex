@@ -1,4 +1,4 @@
-defmodule CurrencyText.ThreeDigits do
+defmodule CurrencyText.Vnd.Helper.ThreeDigits do
   require Logger
   def build(value) do
     ""
@@ -6,7 +6,7 @@ defmodule CurrencyText.ThreeDigits do
   end
 
   defp build(result, %{billions: billions} = value) do
-    in_words = billions |> CurrencyText.Helper.Helper.read_block_three()
+    in_words = billions |> CurrencyText.Vnd.Helper.ToWords.read_block_three()
 
     in_words
     |> case do
@@ -19,7 +19,7 @@ defmodule CurrencyText.ThreeDigits do
   end
 
   defp build(result, %{millions: millions} = value) do
-    in_words = millions |> CurrencyText.Helper.Helper.read_block_three()
+    in_words = millions |> CurrencyText.Vnd.Helper.ToWords.read_block_three()
 
     in_words
     |> case do
@@ -32,7 +32,7 @@ defmodule CurrencyText.ThreeDigits do
   end
 
   defp build(result, %{thousands: thousands} = value) do
-    in_words = thousands |> CurrencyText.Helper.Helper.read_block_three()
+    in_words = thousands |> CurrencyText.Vnd.Helper.ToWords.read_block_three()
 
     in_words
     |> case do
@@ -44,15 +44,16 @@ defmodule CurrencyText.ThreeDigits do
     |> build(value |> Map.drop([:thousands]))
   end
 
-  defp build(result, %{unit: unit} = value) do
-    in_words = unit |> CurrencyText.Helper.Helper.read_block_three()
+  defp build(result, %{unit: unit}) do
+    in_words = unit |> CurrencyText.Vnd.Helper.ToWords.read_block_three()
 
     in_words
     |> case do
       "" ->
         result
       v ->
-        (result <> v <> " đồng")
+        (result <> v)
     end
+    |> Kernel.<>(" đồng")
   end
 end

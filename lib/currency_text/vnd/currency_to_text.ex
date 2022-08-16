@@ -7,6 +7,7 @@ defmodule CurrencyText.CurrencyToText do
         convert_to_words_vietnamese(value)
       _ ->
         true
+        #convert_to_words_en(value)
     end
   end
 
@@ -20,6 +21,11 @@ defmodule CurrencyText.CurrencyToText do
     |> Logger.error()
 
     %{billions: billions, millions: millions, thousands: thousands, unit: unit}
-    |> CurrencyText.ThreeDigits.build()
+    |> CurrencyText.Vnd.Helper.ThreeDigits.build()
+    |> String.capitalize()
+  end
+
+  defp convert_to_words_en(value) do
+    value |> Cldr.Number.to_string(format: :spellout)
   end
 end
